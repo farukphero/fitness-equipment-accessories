@@ -1,0 +1,118 @@
+/* src/ImageMosaic.css */
+
+.image-mosaic {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-auto-rows: 150px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.image-item {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Custom sizes for the mosaic effect */
+.image-item-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.image-item-2 {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.image-item-3 {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.image-item-4 {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.image-item-5 {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1200px) {
+  .image-mosaic {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-auto-rows: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-mosaic {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-auto-rows: 100px;
+  }
+  .image-item-1 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  .image-item-2 {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  
+  .image-item-3 {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  
+  .image-item-4 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .image-item-5 {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-mosaic {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-auto-rows: 80px;
+  }
+  .image-item-1 {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  
+  .image-item-2 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  
+  .image-item-3 {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  
+  .image-item-4 {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+  
+  .image-item-5 {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+}
