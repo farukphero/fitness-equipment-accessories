@@ -43,7 +43,7 @@ const ProductManagement = () => {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+   
   } = useForm<TProducts>();
   const navigate = useNavigate();
 

@@ -5,7 +5,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -20,11 +19,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import {
-  useDeleteProductMutation,
-  useGetAllProductsQuery,
-} from "@/redux/api/catgoryApi";
-import { TProducts } from "@/Types/types";
+ 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -41,7 +36,7 @@ import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
 const Cart = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const limit = 10;
   const { data, isLoading, refetch } = useGetAllCartsQuery({
     page: currentPage,
     limit,

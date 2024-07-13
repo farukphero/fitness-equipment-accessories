@@ -49,7 +49,7 @@ const EditProduct = () => {
   const {
     data: productData,
     isLoading: productLoading,
-    error: productError,
+    
   } = useGetSingleProductQuery(id);
 
   const { register, handleSubmit, setValue, reset, watch } = useForm<TProducts>(

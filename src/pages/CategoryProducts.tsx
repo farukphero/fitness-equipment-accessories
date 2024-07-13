@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { ChangeEvent, useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import { options } from "@/utils/MultiSelectData";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 import {
   Select,
   SelectContent,
@@ -27,7 +27,7 @@ interface TFilterItem {
 
 const CategoryProducts = () => {
   const [selected, setSelected] = useState([]);
-  const [filterProductName, setFilterProductName] = useState("");
+
   const [sorting, setSorting] = useState("");
 
   const location = useLocation();
@@ -42,12 +42,10 @@ const CategoryProducts = () => {
 
   const categoryName = getCategoryName(location.pathname);
 
+  const filterData = selected.map((item: TFilterItem) => item?.value);
 
-
-  const filterData = selected.map((item: TFilterItem)=> item?.value)
-
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Debounce the search term
   const debouncedSearch = debounce((value: string) => {
@@ -85,13 +83,10 @@ const CategoryProducts = () => {
     setSearchTerm(e.target.value);
   };
 
-   const handleAll =()=>{
-    setFilterProductName("")
-    setSelected([])
-    setSorting("")
-   }
-
-    
+  const handleAll = () => {
+    setSelected([]);
+    setSorting("");
+  };
 
   return (
     <section className="my-10 ">
@@ -109,7 +104,9 @@ const CategoryProducts = () => {
         </h1>
       </div>
       <div className="flex justify-between my-5">
-        <Button variant="outline" onClick={handleAll}>All</Button>
+        <Button variant="outline" onClick={handleAll}>
+          All
+        </Button>
         <Select onValueChange={handleSortChange}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Sort by price" />
@@ -126,8 +123,7 @@ const CategoryProducts = () => {
           <Input
             placeholder="Search by product name"
             className="mb-5 mt-2"
-            onChange={handleSearchChange
-            }
+            onChange={handleSearchChange}
           />
         </div>
         <div>
@@ -150,32 +146,34 @@ const CategoryProducts = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10">
-        {(data?.data && !error) &&
-          data?.data?.map((product: TProducts, index: number) => (
-           
-              <div className="flex flex-col justify-between border rounded-lg">
-                <div>
-                  <img
-                    src={product?.upload_image}
-                    alt=""
-                    className="w-full h-52 rounded-t-lg"
-                  />
+        {data?.data &&
+          !error &&
+          data?.data?.map((product: TProducts) => (
+            <div className="flex flex-col justify-between border rounded-lg">
+              <div>
+                <img
+                  src={product?.upload_image}
+                  alt=""
+                  className="w-full h-52 rounded-t-lg"
+                />
 
-                  <div className="p-3">{product.product_name}</div>
-                  <div className="p-3">
-                    <span className="text-gray-900 text-lg font-medium">
-                      {" "}
-                      ${product?.price}
-                    </span>
-                  </div>
-                  <Link to={`/category-products/${product?.category}/${product._id}`} className="flex justify-center py-5">
-                    <Button variant="primary" className="mt-2">
-                      View details
-                    </Button>
-                  </Link>
+                <div className="p-3">{product.product_name}</div>
+                <div className="p-3">
+                  <span className="text-gray-900 text-lg font-medium">
+                    {" "}
+                    ${product?.price}
+                  </span>
                 </div>
+                <Link
+                  to={`/category-products/${product?.category}/${product._id}`}
+                  className="flex justify-center py-5"
+                >
+                  <Button variant="primary" className="mt-2">
+                    View details
+                  </Button>
+                </Link>
               </div>
-             
+            </div>
           ))}
       </div>
     </section>

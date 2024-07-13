@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -31,8 +29,9 @@ import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
 const ProductTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const { data, isLoading, error } = useGetAllProductsQuery({
+
+  const limit = 10;
+  const { data, isLoading } = useGetAllProductsQuery({
     page: currentPage,
     limit,
   });

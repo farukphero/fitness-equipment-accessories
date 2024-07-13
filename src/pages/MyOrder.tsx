@@ -18,11 +18,9 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import { useDeleteProductMutation } from "@/redux/api/catgoryApi";
-import { TProducts } from "@/Types/types";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+
 import Swal from "sweetalert2";
 import {
   useDeleteOrderMutation,
@@ -32,8 +30,8 @@ import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
 const MyOrder = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const { data, isLoading, error } = useGetAllOrdersQuery({
+  const limit = 10;
+  const { data, isLoading } = useGetAllOrdersQuery({
     page: currentPage,
     limit,
   });
