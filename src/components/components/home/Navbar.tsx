@@ -6,12 +6,12 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="py-5">
+    <div className="py-5 z-50">
       <div className="relative flex items-center justify-between">
         <Link to="/" relative="path">
           <img src={logo} alt="logo" className="h-8" />
         </Link>
-        <ul className=" items-center hidden space-x-8 lg:flex">
+        <ul className=" items-center hidden space-x-8 lg:flex z-50">
           <li>
             <a
               href="/"
@@ -42,28 +42,25 @@ export const Navbar = () => {
               Pricing
             </a>
           </li>
-          <li>
-            <a
-              href="/"
-              aria-label="About us"
-              title="About us"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              About us
-            </a>
-          </li>
         </ul>
-        <div className="items-center hidden space-x-8 lg:flex z-50">
-       
+        <ul className="items-center hidden space-x-8 lg:flex z-50">
+          <li>
+            <Link
+              to="/cart"
+              className="flex items-center justify-center h-10 px-6 font-medium  rounded shadow-md bg-[#FFFF] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none hover:text-white text-[#c0470a] duration-700 ease-in-out border border-[#c0470a]"
+            >
+              My Cart
+            </Link>
+          </li>
+          <li>
             <Link
               to="/product-management"
               className="flex items-center justify-center h-10 px-6 font-medium    duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white "
-              
             >
               Product Management
             </Link>
-       
-        </div>
+          </li>
+        </ul>
         <div className="lg:hidden">
           <button
             aria-label="Open Menu"
@@ -91,31 +88,9 @@ export const Navbar = () => {
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <a
-                      href="/"
-                      aria-label="Company"
-                      title="Company"
-                      className="inline-flex items-center"
-                    >
-                      <svg
-                        className="w-8 text-deep-purple-accent-400"
-                        viewBox="0 0 24 24"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeMiterlimit="10"
-                        stroke="currentColor"
-                        fill="none"
-                      >
-                        <rect x="3" y="1" width="7" height="12" />
-                        <rect x="3" y="17" width="7" height="6" />
-                        <rect x="14" y="1" width="7" height="6" />
-                        <rect x="14" y="11" width="7" height="12" />
-                      </svg>
-                      <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                        Company
-                      </span>
-                    </a>
+                    <Link to="/" relative="path">
+                      <img src={logo} alt="logo" className="h-8" />
+                    </Link>
                   </div>
                   <div>
                     <button
@@ -177,10 +152,16 @@ export const Navbar = () => {
                     </li>
                     <li>
                       <Link
+                        to="/cart"
+                        className="flex items-center justify-center h-10 px-6 font-medium  rounded shadow-md bg-[#FFFF] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none hover:text-white text-[#c0470a] duration-700 ease-in-out border border-[#c0470a]"
+                      >
+                        My Cart
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         to="/product-management"
-                        className="inline-flex items-center justify-center h-10 px-6 font-medium   duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white"
-                        aria-label="Product Management"
-                        title="Product Management"
+                        className="flex items-center justify-center h-10 px-6 font-medium    duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white "
                       >
                         Product Management
                       </Link>

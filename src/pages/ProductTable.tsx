@@ -93,7 +93,7 @@ const ProductTable = () => {
             <TableHead className="w-[100px]">Name</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>Category</TableHead>
-            <TableHead colSpan={3} className="text-center">
+            <TableHead >
               Action
             </TableHead>
           </TableRow>
@@ -106,14 +106,17 @@ const ProductTable = () => {
               </TableCell>
               <TableCell>{product.price}</TableCell>
               <TableCell>{product.category}</TableCell>
-              <Link to={`/update-product/${product?._id}`}>
-                <TableCell className="text-center"><Button>Edit</Button></TableCell>
-              </Link>
-              <TableCell
-                onClick={() => handleDelete(product?._id as string)}
-                className="text-center cursor-pointer"
-              >
-                <Button variant="destructive">Delete</Button>
+              <TableCell  className=" space-x-3">
+                <Link to={`/update-product/${product?._id}`}>
+                  <Button>Edit</Button>
+                </Link>
+                <Button
+                  onClick={() => handleDelete(product?._id as string)}
+                  className="text-center cursor-pointer"
+                  variant="destructive"
+                >
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}

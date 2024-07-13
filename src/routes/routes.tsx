@@ -5,6 +5,8 @@ import Home from "@/pages/Home";
 import ProductTable from "@/pages/ProductTable";
 import ProductManagement from "@/pages/ProductManagement";
 import EditProduct from "@/pages/EditProduct";
+import ProductDetails from "@/pages/ProductDetails";
+import Cart from "@/pages/Cart";
 
 const router = createBrowserRouter([
     {
@@ -32,39 +34,17 @@ const router = createBrowserRouter([
           path: "update-product/:id",
           element: <EditProduct />,
         },
+        {
+          path: "category-products/:name/:id",
+          element: <ProductDetails />,
+        },
+        {
+          path: "cart",
+          element: <Cart />,
+        },
       ],
     },
-    // {
-    //   path: "/admin",
-    //   element: <App />,
-    //   children: [
-    //     // {
-    //     //     index: true,  atar mane hosse '/' a aslei about component ar data show korbe
-    //     //     element: <About />,
-    //     //   },
-  
-    //     {
-    //       index: true,
-    //       element: <AdminDashboard />,
-    //     },
-    //     {
-    //       path: "dashboard",
-    //       element: <AdminDashboard />,
-    //     },
-    //     {
-    //       path: "create-student",
-    //       element: <CreateStudent />,
-    //     },
-    //     {
-    //       path: "create-admin",
-    //       element: <CreateAdmin />,
-    //     },
-    //     {
-    //       path: "create-faculty",
-    //       element: <CreateFaculty />,
-    //     },
-    //   ],
-    // },
+     
      
   ]);
   

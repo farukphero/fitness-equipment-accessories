@@ -3,11 +3,12 @@ import { baseApi } from "./baseApi";
 const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCategoryProducts: builder.query({
-      query: ({ category }) => ({
+      query: ({ category, searchTerm, sort, filter }) => ({
         url: `/products/category`,
         method: "GET",
-        params: { category },
+        params: { category, searchTerm, sort, filter },
       }),
+      providesTags: ["product"],
     }),
     getAllProducts: builder.query({
       query: ({ limit, page }) => ({
@@ -56,5 +57,5 @@ export const {
   useGetAllProductsQuery,
   useGetSingleProductQuery,
   useUpdateProductMutation,
-  useDeleteProductMutation
+  useDeleteProductMutation,
 } = categoryApi;
