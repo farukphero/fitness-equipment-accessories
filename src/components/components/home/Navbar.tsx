@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/images/EliteFit1.png";
+import { NavHashLink } from "react-router-hash-link";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,34 +14,36 @@ export const Navbar = () => {
         </Link>
         <ul className=" items-center hidden space-x-8 lg:flex z-50">
           <li>
-            <a
-              href="/"
+            <NavHashLink
+              smooth
+              to="/#categories"
               aria-label="Our product"
               title="Our product"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Product
-            </a>
+            </NavHashLink>
           </li>
           <li>
-            <a
-              href="/"
+            <NavHashLink
+              smooth
+              to="/#features"
               aria-label="Our product"
               title="Our product"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Features
-            </a>
+            </NavHashLink>
           </li>
           <li>
-            <a
-              href="/"
+            <Link
+              to="/about-us"
               aria-label="Product pricing"
               title="Product pricing"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
-              Pricing
-            </a>
+              About
+            </Link>
           </li>
         </ul>
         <ul className="items-center hidden space-x-8 lg:flex z-50">
@@ -84,7 +87,7 @@ export const Navbar = () => {
             </svg>
           </button>
           {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full">
+            <div className="absolute top-0 left-0 w-full z-50">
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
@@ -111,45 +114,38 @@ export const Navbar = () => {
                 <nav>
                   <ul className="space-y-4">
                     <li>
-                      <a
-                        href="/"
+                      <NavHashLink
+                        smooth
+                        to="/#categories"
                         aria-label="Our product"
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Product
-                      </a>
+                      </NavHashLink>
                     </li>
                     <li>
-                      <a
-                        href="/"
+                      <NavHashLink
+                        smooth
+                        to="/#features"
                         aria-label="Our product"
                         title="Our product"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Features
-                      </a>
+                      </NavHashLink>
                     </li>
                     <li>
-                      <a
-                        href="/"
+                      <Link
+                        to="/about-us"
                         aria-label="Product pricing"
                         title="Product pricing"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Pricing
-                      </a>
+                        About
+                      </Link>
                     </li>
-                    <li>
-                      <a
-                        href="/"
-                        aria-label="About us"
-                        title="About us"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                      >
-                        About us
-                      </a>
-                    </li>
+
                     <li>
                       <Link
                         to="/cart"
@@ -161,7 +157,7 @@ export const Navbar = () => {
                     <li>
                       <Link
                         to="/product-management"
-                        className="flex items-center justify-center h-10 px-6 font-medium    duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white "
+                        className="flex items-center justify-center h-10 px-6 font-medium duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white z-50"
                       >
                         Product Management
                       </Link>

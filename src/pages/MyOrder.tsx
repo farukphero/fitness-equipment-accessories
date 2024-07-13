@@ -18,31 +18,32 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-import {
-  useDeleteProductMutation,
-  useGetAllProductsQuery,
-} from "@/redux/api/catgoryApi";
+import { useDeleteProductMutation } from "@/redux/api/catgoryApi";
 import { TProducts } from "@/Types/types";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import {
+  useDeleteOrderMutation,
+  useGetAllOrdersQuery,
+} from "@/redux/api/orderApi";
 import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
-const ProductTable = () => {
+const MyOrder = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const { data, isLoading, error } = useGetAllProductsQuery({
+  const { data, isLoading, error } = useGetAllOrdersQuery({
     page: currentPage,
     limit,
   });
 
-  const [deleteProduct] = useDeleteProductMutation();
+  const [deleteOrder] = useDeleteOrderMutation();
 
   const totalCount = data?.data?.meta?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / limit);
 
-  const shouldWarn = data?.data?.products?.length > 0;
+  const shouldWarn = data?.data?.orders?.length > 0;
   usePageRefreshWarning(shouldWarn);
 
   if (isLoading) {
@@ -62,7 +63,6 @@ const ProductTable = () => {
   };
 
   const handleDelete = async (id: string) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -73,7 +73,7 @@ const ProductTable = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await deleteProduct(id);
+        await deleteOrder(id);
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",
@@ -85,36 +85,31 @@ const ProductTable = () => {
 
   return (
     <section className="my-10">
-      <div className="flex justify-end">
-        <Link to="/create-product">
-          <Button className="flex items-center justify-end h-10 px-6 font-medium rounded shadow-md hover:bg-[#D56128] bg-white focus:shadow-outline focus:outline-none hover:text-white  text-[#D56128] duration-700 ease-in-out border border-[#D56128]">
-            Create New Product{" "}
-          </Button>
-        </Link>
+      <div>
+        <h2 className="text-black font-semibold text-xl md:text-3xl">
+          My Orders{" "}
+        </h2>
       </div>
       <Table className="border rounded-md mt-5">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Name</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Category</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Phone number</TableHead>
+            <TableHead>Cost</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data?.products?.map((product: TProducts) => (
-            <TableRow key={product._id}>
-              <TableCell className="font-medium">
-                {product.product_name}
-              </TableCell>
-              <TableCell>{product.price}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell className="flex lg:block justify-end text-center cursor-pointer space-x-5">
-                <Link to={`/update-product/${product?._id}`}>
-                  <Button>Edit</Button>
-                </Link>
+          {data?.data?.orders?.map((order: any) => (
+            <TableRow key={order._id}>
+              <TableCell className="font-medium">{order.full_name}</TableCell>
+              <TableCell>{order.email}</TableCell>
+              <TableCell>{order.phone_number}</TableCell>
+              <TableCell>{order?.cart?.price}</TableCell>
+              <TableCell className=" space-x-3">
                 <Button
-                  onClick={() => handleDelete(product?._id as string)}
+                  onClick={() => handleDelete(order?._id as string)}
                   className="text-center cursor-pointer"
                   variant="destructive"
                 >
@@ -163,4 +158,4 @@ const ProductTable = () => {
   );
 };
 
-export default ProductTable;
+export default MyOrder;

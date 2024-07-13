@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ErrorMessage } from "@/components/components/error-message";
 import { Button } from "@/components/ui/button";
+import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 import { useCreateCartMutation } from "@/redux/api/cartApi";
 import { useGetSingleProductQuery } from "@/redux/api/catgoryApi";
 import { useState } from "react";
@@ -18,8 +19,11 @@ const ProductDetails = () => {
   const [createCart, { isLoading: CartLoading, error: cartError }] =
     useCreateCartMutation();
 
+    const shouldWarn = data?.data && Object.keys(data.data).length > 0;
+    usePageRefreshWarning(shouldWarn);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-center py-10">Loading...</div>;
   }
   if (error) {
     console.log(error);
@@ -53,6 +57,7 @@ const ProductDetails = () => {
     if (res.success) {
       refetch();
       toast.success(res.message);
+      navigate("/cart")
     }
   };
 
@@ -62,7 +67,8 @@ const ProductDetails = () => {
       message: "Quantity exceeds available stock.",
     },
   ];
-
+  
+  
   return (
     <div className="py-5 lg:py-5">
       <button

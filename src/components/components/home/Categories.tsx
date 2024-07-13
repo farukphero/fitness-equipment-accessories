@@ -53,7 +53,7 @@ const Categories = () => {
 
 
   return (
-    <section>
+    <section id="categories">
       <h1 className="text-black font-semibold text-xl">
         GEAR DESIGNED TO COMPLEMENT OUR EVERYDAY LIFE
       </h1>

@@ -13,44 +13,43 @@ const featuredData = [
     name: "Amstaff Fitness Wooden Under desk Treadmill/Walking Pad",
     original_price: 1100,
     offered_price: 999,
+    category : "benches"
   },
   {
     image: image2,
     name: "Amstaff Fitness SD-5000 All-In-one Smith Machine",
     original_price: 700,
     offered_price: 599,
+    category : "squat-power-racks"
   },
   {
     image: image3,
     name: "SpaceSmart Wall-Mounted Functional Trainer - Single Stack",
     original_price: 1000,
     offered_price: 888,
+    category : "body-weight-gymnastics"
   },
   {
     image: image4,
     name: "Amstaff Fitness SD-2500 All-In-one Smith Machine",
     original_price: 900,
     offered_price: 698,
+    category : "cable-machines"
   },
 ];
 
 const FeaturedProducts = () => {
   return (
-    <section className="mt-20">
+    <section className="mt-20" id="features">
       <div className="flex justify-between">
         <h1 className="text-black font-semibold text-xl">FEATURED PRODUCTS</h1>
-        <Button
-          variant={"link"}
-          className="text-black font-semibold text-xl underline"
-        >
-          See All
-        </Button>
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
         {featuredData &&
           featuredData?.map((tes, index) => (
-            <Link key={index} to="/fgfgf">
+            <Link key={index} to={`/category-products/${tes?.category}`}>
               <div className="flex flex-col justify-between border rounded-lg">
                 <div>
                   <img
@@ -68,7 +67,7 @@ const FeaturedProducts = () => {
                   </div>
                   <div className="flex justify-center py-5">
                     <Button variant="primary" className="mt-2">
-                      Add to Cart
+                      View details
                     </Button>
                   </div>
                 </div>

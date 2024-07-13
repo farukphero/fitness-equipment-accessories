@@ -8,9 +8,10 @@ import { TProducts } from "@/Types/types";
 import { ErrorMessage } from "@/components/components/error-message";
 import { IoMdArrowBack } from "react-icons/io";
 import { Input } from "@/components/ui/input";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import { options } from "@/utils/MultiSelectData";
+import { debounce } from 'lodash';
 import {
   Select,
   SelectContent,
@@ -18,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 interface TFilterItem {
   label: string;
   value: string;
@@ -44,21 +46,43 @@ const CategoryProducts = () => {
 
   const filterData = selected.map((item: TFilterItem)=> item?.value)
 
- 
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  // Debounce the search term
+  const debouncedSearch = debounce((value: string) => {
+    setDebouncedSearchTerm(value);
+  }, 300);
+
+  useEffect(() => {
+    debouncedSearch(searchTerm);
+
+    // Cleanup function to cancel debounce on unmount
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch, searchTerm]);
 
   const { data, isLoading, error } = useGetCategoryProductsQuery({
     category: categoryName,
-    searchTerm: filterProductName,
+    searchTerm: debouncedSearchTerm,
     sort: sorting,
     filter: filterData,
   });
 
+  const shouldWarn = data?.data?.length > 0;
+  usePageRefreshWarning(shouldWarn);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-center py-10">Loading...</div>;
   }
 
   const handleSortChange = (value: string) => {
     setSorting(value);
+  };
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
    const handleAll =()=>{
@@ -66,6 +90,8 @@ const CategoryProducts = () => {
     setSelected([])
     setSorting("")
    }
+
+    
 
   return (
     <section className="my-10 ">
@@ -100,8 +126,7 @@ const CategoryProducts = () => {
           <Input
             placeholder="Search by product name"
             className="mb-5 mt-2"
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setFilterProductName(e.target.value)
+            onChange={handleSearchChange
             }
           />
         </div>
@@ -125,9 +150,9 @@ const CategoryProducts = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-10">
-        {data?.data &&
+        {(data?.data && !error) &&
           data?.data?.map((product: TProducts, index: number) => (
-            <Link key={index} to={`/category-products/${product?.category}/${product._id}`}>
+           
               <div className="flex flex-col justify-between border rounded-lg">
                 <div>
                   <img
@@ -143,14 +168,14 @@ const CategoryProducts = () => {
                       ${product?.price}
                     </span>
                   </div>
-                  <div className="flex justify-center py-5">
+                  <Link to={`/category-products/${product?.category}/${product._id}`} className="flex justify-center py-5">
                     <Button variant="primary" className="mt-2">
                       View details
                     </Button>
-                  </div>
+                  </Link>
                 </div>
               </div>
-            </Link>
+             
           ))}
       </div>
     </section>

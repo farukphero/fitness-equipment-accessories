@@ -37,6 +37,7 @@ import {
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
 const Cart = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,8 +52,12 @@ const Cart = () => {
 
   const totalCount = data?.data?.meta?.totalCount || 0;
   const totalPages = Math.ceil(totalCount / limit);
+
+  const shouldWarn = data?.data?.carts?.length > 0;
+  usePageRefreshWarning(shouldWarn);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="text-center py-10"> Loading...</div>;
   }
 
   const handleNext = () => {
@@ -129,15 +134,19 @@ const Cart = () => {
     0;
 
   return (
-    <section className="my-10">
+    <section className="my-10 -z-50">
       <div className="text-black font-semibold text-xl">My Cart</div>
       <Table className="border rounded-md mt-5">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Name</TableHead>
             <TableHead>Quantity</TableHead>
+            
+            
             <TableHead>Price</TableHead>
-            <TableHead colSpan={3} className="text-center">
+            
+          
+            <TableHead   >
               Action
             </TableHead>
           </TableRow>
@@ -148,7 +157,7 @@ const Cart = () => {
               <TableCell className="font-medium">
                 {cart?.product?.product_name}
               </TableCell>
-              <TableCell className="space-x-3">
+              <TableCell className="flex justify-center gap-x-3">
                 <button
                   onClick={() => handleDecrement(cart._id, cart.quantity)}
                 >
@@ -175,17 +184,12 @@ const Cart = () => {
               </TableCell>
 
               <TableCell>{cart.price}</TableCell>
+              
 
-              <TableCell className="text-center cursor-pointer space-x-5">
-                {cart?.product?.stock === cart.quantity ? (
-                  <span className="cursor-not-allowed">
-                    <Button disabled>Order now</Button>
-                  </span>
-                ) : (
-                  <Link to={`/order/${cart?._id}`}>
-                    <Button>Order now</Button>
-                  </Link>
-                )}
+              <TableCell className="flex lg:block justify-end text-center cursor-pointer space-x-5">
+                <Link to={`/order/${cart?._id}`}>
+                  <Button>Order now</Button>
+                </Link>
 
                 <Button
                   onClick={() => handleDelete(cart?._id as string)}

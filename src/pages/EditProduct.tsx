@@ -27,7 +27,6 @@ import { joditConfig as baseConfig } from "@/config";
 import uploadFile from "@/helper/ImageUploder";
 import { CloudUpload } from "lucide-react";
 import {
-  useCreateProductMutation,
   useGetSingleProductQuery,
   useUpdateProductMutation,
 } from "@/redux/api/catgoryApi";
@@ -35,8 +34,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@/components/components/error-message";
 import { SuccessMessage } from "@/components/components/success-message";
 import { TProducts } from "@/Types/types";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
+import usePageRefreshWarning from "@/hooks/usePageRefreshWarning";
 
 const EditProduct = () => {
   const editor = useRef<Jodit | null>(null);
@@ -44,6 +44,7 @@ const EditProduct = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: productData,
@@ -65,6 +66,10 @@ const EditProduct = () => {
   );
   const category = watch("category");
 
+  const shouldWarn =
+    productData?.data && Object.keys(productData?.data).length > 0;
+  usePageRefreshWarning(shouldWarn);
+
   useEffect(() => {
     if (productData) {
       reset({
@@ -77,7 +82,6 @@ const EditProduct = () => {
       });
     }
   }, [productData, reset]);
-  const navigate = useNavigate();
 
   const [updateProduct, { data, isLoading, error }] =
     useUpdateProductMutation();
@@ -158,7 +162,9 @@ const EditProduct = () => {
     setValue("category", value);
   };
 
-  
+  if (productLoading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
 
   return (
     <div className="my-10">
