@@ -8,7 +8,7 @@ export const Navbar = () => {
   return (
     <div className="py-5">
       <div className="relative flex items-center justify-between">
-        <Link to="/" relative="path"> 
+        <Link to="/" relative="path">
           <img src={logo} alt="logo" className="h-8" />
         </Link>
         <ul className=" items-center hidden space-x-8 lg:flex">
@@ -53,18 +53,17 @@ export const Navbar = () => {
             </a>
           </li>
         </ul>
-        <ul className="  items-center hidden space-x-8 lg:flex">
-          <li>
-            <a
-              href="/"
-              className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white"
-              aria-label="Sign up"
-              title="Sign up"
+        <div className="items-center hidden space-x-8 lg:flex z-50">
+       
+            <Link
+              to="/product-management"
+              className="flex items-center justify-center h-10 px-6 font-medium    duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white "
+              
             >
-              Sign up
-            </a>
-          </li>
-        </ul>
+              Product Management
+            </Link>
+       
+        </div>
         <div className="lg:hidden">
           <button
             aria-label="Open Menu"
@@ -177,14 +176,14 @@ export const Navbar = () => {
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="/"
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        aria-label="Sign up"
-                        title="Sign up"
+                      <Link
+                        to="/product-management"
+                        className="inline-flex items-center justify-center h-10 px-6 font-medium   duration-200 rounded shadow-md bg-[#D56128] hover:bg-[#c0470a] focus:shadow-outline focus:outline-none text-white"
+                        aria-label="Product Management"
+                        title="Product Management"
                       >
-                        Sign up
-                      </a>
+                        Product Management
+                      </Link>
                     </li>
                   </ul>
                 </nav>

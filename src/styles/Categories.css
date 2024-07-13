@@ -5,8 +5,7 @@
   border-radius: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   color: white;
-  background-color: aliceblue
-   
+  background-color: aliceblue;
 }
 
 .swiper-button-next::after,
@@ -17,4 +16,18 @@
 .swiper-button-prev::after {
   font-size: 20px !important;
   color: rgb(0, 0, 0);
+}
+
+/* Default styles for Jodit Editor */
+.jodit-container {
+  max-width: 1536px;
+  margin: 0 auto;
+}
+
+/* Styles for mobile devices */
+@media (max-width: 768px) {
+  .jodit-container {
+    max-width: 320px;
+    margin: 0 auto;
+  }
 }

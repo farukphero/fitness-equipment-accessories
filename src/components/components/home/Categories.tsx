@@ -12,35 +12,46 @@ import image5 from "../../../assets/images/categories/image5.avif";
 import image6 from "../../../assets/images/categories/image6.avif";
 
 import { Link } from "react-router-dom";
+ 
 
 const categoryData = [
   {
     image: image1,
     name: "Cable Machines",
+    url :"cable-machines"
   },
   {
     image: image2,
     name: "Benches",
+    url :"benches"
   },
   {
     image: image3,
     name: "Barbells",
+    url :"barbells"
   },
   {
     image: image4,
     name: "Squat & Power Racks",
+    url :"squat-power-racks"
   },
   {
     image: image5,
     name: "Lower Body & Legs",
+    url :"lower-body-legs"
   },
   {
     image: image6,
     name: "Body Weight & Gymnastics",
+    url :"body-weight-gymnastics"
   },
 ];
 
 const Categories = () => {
+
+
+
+
   return (
     <section>
       <h1 className="text-black font-semibold text-xl">
@@ -85,7 +96,7 @@ const Categories = () => {
         {categoryData &&
           categoryData?.map((tes, index) => (
             <SwiperSlide key={index}>
-              <Link to="/fgfgf">
+              <Link to={`/category-products/${tes?.url}`}>
                 <div className="flex flex-col justify-between">
                   
                       <div>

@@ -4,7 +4,7 @@ import logo from "../../../assets/images/EliteFit1.png";
 export const Footer = () => {
   const date = new Date().getFullYear();
   return (
-    <div className="pt-10">
+    <div className="pt-10 border-t-2">
       <div className="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2">
           <Link to="/" relative="path">

@@ -1,6 +1,10 @@
 import App from "@/App";
-import Home from "@/pages/Home";
 import { createBrowserRouter } from "react-router-dom";
+import CategoryProducts from "@/pages/CategoryProducts";
+import Home from "@/pages/Home";
+import ProductTable from "@/pages/ProductTable";
+import ProductManagement from "@/pages/ProductManagement";
+import EditProduct from "@/pages/EditProduct";
 
 const router = createBrowserRouter([
     {
@@ -12,14 +16,22 @@ const router = createBrowserRouter([
             element: <Home/> ,
           },
   
-        // {
-        //   path: "about",
-        //   element: <About />,
-        // },
-        // {
-        //   path: "contact",
-        //   element: <Contact />,
-        // },
+        {
+          path: "category-products/:name",
+          element: <CategoryProducts />,
+        },
+        {
+          path: "product-management",
+          element: <ProductTable />,
+        },
+        {
+          path: "create-product",
+          element: <ProductManagement />,
+        },
+        {
+          path: "update-product/:id",
+          element: <EditProduct />,
+        },
       ],
     },
     // {
